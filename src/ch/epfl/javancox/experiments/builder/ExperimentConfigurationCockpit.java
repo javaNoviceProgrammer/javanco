@@ -7,11 +7,67 @@ import ch.epfl.general_libraries.logging.Logger;
 import ch.epfl.javancox.experiments.builder.object_enum.AbstractEnumerator;
 import ch.epfl.javancox.experiments.builder.object_enum.ExperimentExecutionManager;
 import ch.epfl.javancox.experiments.builder.swing_gui.SwingObjectConfigurationAndEnumerator;
-import ch.epfl.javancox.experiments.builder.tree_model.ObjectConstuctionTreeModel;
 
 public class ExperimentConfigurationCockpit extends SwingObjectConfigurationAndEnumerator<Experiment> {
 
 	private static final long serialVersionUID = 1L;
+	
+	public static void execute(String[] args, boolean systemExit) {
+		try {
+			String claz = null;
+			String pre = null;
+			String log4jFile = null;
+			String defaultFile = null;
+			if (args.length > 0) {
+				if (args[0].equals("-help") || args[0].equals("help") || args[0].equals("-h") || args[0].equals("usage")) {
+					printUsage();
+				}
+				for (int i = 0 ; i < args.length ; i++) {
+					if (args[i].equals("-c")) {
+						claz = args[i+1];
+					}
+					if (args[i].equals("-p")) {
+						pre = args[i+1];
+					}
+					if (args[i].equals("-l")) {
+						log4jFile = args[i+1];
+					}
+					if (args[i].equals("-default")) {
+						defaultFile = args[i+1];
+					}
+				}
+			}
+			if (log4jFile != null) {
+				Logger.initLogger(new File(log4jFile));
+			}
+			ExperimentConfigurationCockpit co;
+			if (claz != null) {
+				Class c = Class.forName(claz);
+				Class<? extends Experiment> cc = (Class<? extends Experiment>)c;
+				if (pre != null) {
+					co = new ExperimentConfigurationCockpit(cc, pre.split(";"));
+				} else {
+					co = new ExperimentConfigurationCockpit(cc, "".split(";"));
+				}
+			} else {
+				if (pre != null) {
+					co = new ExperimentConfigurationCockpit(null, pre.split(";"));
+				} else {
+					co = new ExperimentConfigurationCockpit();
+				}
+			}
+			if (defaultFile != null) {
+				co.show(defaultFile);
+			} else if(systemExit) {
+				co.show(true); // I modified this to prevent system exit ...
+			} else {
+				co.show(false); // I modified this to prevent system exit ...
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
