@@ -2,6 +2,9 @@ package ch.epfl.javancox.experiments.builder;
 
 import java.io.File;
 
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 import ch.epfl.general_libraries.experiment_aut.Experiment;
 import ch.epfl.general_libraries.logging.Logger;
 import ch.epfl.javancox.experiments.builder.object_enum.AbstractEnumerator;
@@ -13,6 +16,12 @@ public class ExperimentConfigurationCockpit extends SwingObjectConfigurationAndE
 	private static final long serialVersionUID = 1L;
 	
 	public static void execute(String[] args, boolean systemExit) {
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+				| UnsupportedLookAndFeelException e) {
+			e.printStackTrace();
+		}
 		try {
 			String claz = null;
 			String pre = null;
@@ -71,7 +80,12 @@ public class ExperimentConfigurationCockpit extends SwingObjectConfigurationAndE
 
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
-
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+				| UnsupportedLookAndFeelException e) {
+			e.printStackTrace();
+		}
 
 		try {
 			String claz = null;
