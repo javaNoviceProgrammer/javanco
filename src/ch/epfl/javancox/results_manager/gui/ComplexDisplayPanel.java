@@ -69,7 +69,7 @@ import ch.epfl.general_libraries.results.DataRetrievalOptions;
 import ch.epfl.general_libraries.results.Criterium;
 import ch.epfl.general_libraries.results.CriteriumSet;
 import ch.epfl.general_libraries.utils.Pair;
-import ch.epfl.javanco.ui.swing.FileChooser;
+import ch.epfl.javancox.experiments.FileChooser;
 import ch.epfl.javancox.results_manager.SaveAndLoadAble;
 import ch.epfl.javancox.results_manager.display.AbstractChartProvider;
 import ch.epfl.javancox.results_manager.display.AbstractChartProvider.AbstractChartPanel;

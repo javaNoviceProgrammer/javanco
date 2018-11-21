@@ -17,7 +17,7 @@ public class JavancoFile extends File {
 
 	static {
 		initLogger();	
-		System.setProperty(Javanco.JAVANCO_LAUNCH_DIR_PROPERTY,System.getProperty("user.dir"));
+//		System.setProperty(Javanco.JAVANCO_LAUNCH_DIR_PROPERTY,System.getProperty("user.dir"));
 		/*if (JavancoJarStarter.startedFromJar()) {
 			try {
 				System.setProperty("user.dir",(new File(JavancoJarStarter.getRoot()).getAbsolutePath()));
