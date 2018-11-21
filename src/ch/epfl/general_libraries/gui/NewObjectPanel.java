@@ -7,7 +7,6 @@ import javax.swing.JDialog;
 import javax.swing.JTabbedPane;
 
 import ch.epfl.general_libraries.clazzes.ClassRepository;
-import ch.epfl.general_libraries.random.MantissaBasedPRNStream;
 
 public class NewObjectPanel<X> implements ObjectReceiver<X> {
 
@@ -88,7 +87,7 @@ public class NewObjectPanel<X> implements ObjectReceiver<X> {
 
 
 
-	public static void main(String[] args) throws Exception {
-		new NewObjectPanel<MantissaBasedPRNStream>(MantissaBasedPRNStream.class);
-	}
+//	public static void main(String[] args) throws Exception {
+//		new NewObjectPanel<MantissaBasedPRNStream>(MantissaBasedPRNStream.class);
+//	}
 }
