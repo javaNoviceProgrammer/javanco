@@ -22,7 +22,6 @@ import javax.swing.JPopupMenu;
 import javax.swing.border.EtchedBorder;
 
 import ch.epfl.general_libraries.utils.TypeParser;
-import ch.epfl.javanco.base.Javanco;
 import ch.epfl.javancox.experiments.builder.tree_model.AbstractChooseNode;
 import ch.epfl.javancox.experiments.builder.tree_model.AbstractChooseNode.ActionItem;
 import ch.epfl.javancox.experiments.builder.tree_model.AbstractChooseNode.ActionStructure;
@@ -204,11 +203,6 @@ public abstract class AbstractGUIContainer extends JPanel {
 	}
 
 	public void setIcon(String string) {
-		try {
-			Javanco.initJavanco();
-		} catch (Exception e) {
-			throw new IllegalStateException(e);
-		}
 		String iconPath = System.getProperty("JAVANCO_HOME") + System.getProperty("file.separator") + "img/" + string;
 		ImageIcon image = new ImageIcon(iconPath);
 		textLabel.setIcon(image);
