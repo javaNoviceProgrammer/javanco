@@ -15,6 +15,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -69,7 +70,7 @@ import ch.epfl.general_libraries.results.DataRetrievalOptions;
 import ch.epfl.general_libraries.results.Criterium;
 import ch.epfl.general_libraries.results.CriteriumSet;
 import ch.epfl.general_libraries.utils.Pair;
-import ch.epfl.javancox.experiments.FileChooser;
+import ch.epfl.javancox.results_manager.CustomJFileChooser;
 import ch.epfl.javancox.results_manager.SaveAndLoadAble;
 import ch.epfl.javancox.results_manager.display.AbstractChartProvider;
 import ch.epfl.javancox.results_manager.display.AbstractChartProvider.AbstractChartPanel;
@@ -1123,7 +1124,11 @@ public class ComplexDisplayPanel extends JPanel implements ActionListener,
 			item = new JMenuItem("Export db data");
 			item.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					java.io.File f = FileChooser.promptForSaveFile(parentFrame, "", "coc");
+//					java.io.File f = FileChooser.promptForSaveFile(parentFrame, "", "coc");
+					CustomJFileChooser fChooser = new CustomJFileChooser() ;
+					fChooser.setFileExtension("coc");
+					fChooser.saveFile();
+					File f = fChooser.selectedFile ;
 					((SaveAndLoadAble)retriever).saveToFile(f);
 				}
 			});
@@ -1131,7 +1136,10 @@ public class ComplexDisplayPanel extends JPanel implements ActionListener,
 			item = new JMenuItem("Load an exported dataset");
 			item.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent ev) {
-					java.io.File f = FileChooser.promptForOpenFile(parentFrame, "coc");		
+//					java.io.File f = FileChooser.promptForOpenFile(parentFrame, "coc");	
+					CustomJFileChooser fChooser = new CustomJFileChooser() ;
+					fChooser.openFile("coc");
+					File f = fChooser.selectedFile ;
 					loadCocFile(f);
 				}
 
