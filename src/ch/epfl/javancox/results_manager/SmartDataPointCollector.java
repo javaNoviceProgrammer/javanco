@@ -186,10 +186,6 @@ public class SmartDataPointCollector extends AbstractInOutDataManager implements
 		}
 	}
 
-/*	public List<Pair<String, TreeSet<String>>> getVariableProperties(DataRetrievalOptions p, TreeSet<Integer> expIDs) {
-		return null;
-	}*/
-
 	public AbstractResultsManager getAssociatedResultManager() {
 		return this;
 	}
@@ -250,7 +246,7 @@ public class SmartDataPointCollector extends AbstractInOutDataManager implements
 	}
 
 	@SuppressWarnings("unchecked")
-	public Vector[] getVariableAndConstantPropertiesForGivenMetric(String s) {
+	public Vector<String>[] getVariableAndConstantPropertiesForGivenMetric(String s) {
 		Vector<String> toRet1 = null;
 		try {
 			toRet1 = new Vector<String>(propList.get(s).relatedProperties.keySet());
@@ -260,8 +256,6 @@ public class SmartDataPointCollector extends AbstractInOutDataManager implements
 			return new Vector[]{};
 		}
 		
-	//	Vector<String> toRemove = new Vector<String>(toRet1.size());
-	//	Vector<String> valOfToRemove = new Vector<String>(toRet1.size());
 		TreeMap<String, String> constants = new TreeMap<String, String>();
 		
 		ArrayList<InternalDataPoint> list = new ArrayList<InternalDataPoint>(1000);
@@ -274,7 +268,7 @@ public class SmartDataPointCollector extends AbstractInOutDataManager implements
 				}
 			}
 		}
-		if (list.size() == 0) return new Vector[]{toRet1, new Vector(), null};
+		if (list.size() == 0) return new Vector[]{toRet1, new Vector<String>(), null};
 		InternalDataPoint[] array = list.toArray(new InternalDataPoint[list.size()]);
 		
 		for (String stri : toRet1) {
@@ -297,8 +291,8 @@ public class SmartDataPointCollector extends AbstractInOutDataManager implements
 		
 		java.util.Collections.sort(toRet1);
 		
-		Vector<String> s1 = new Vector();
-		Vector<String> s2 = new Vector();		
+		Vector<String> s1 = new Vector<String>();
+		Vector<String> s2 = new Vector<String>();		
 		for (Map.Entry<String, String> ent : constants.entrySet()) {
 			s1.add(ent.getKey());
 			s2.add(ent.getValue());
@@ -374,7 +368,6 @@ public class SmartDataPointCollector extends AbstractInOutDataManager implements
 		}
 		int used = 0;
 
-		//	ArrayList<InternalDataPoint> aList = new ArrayList<InternalDataPoint>(100);
 		for (InternalExecution exec : getExecListCopy()) {
 			Vector<InternalDataPoint> vec = exec.dataPoints;
 			int size = vec.size();
@@ -396,7 +389,7 @@ public class SmartDataPointCollector extends AbstractInOutDataManager implements
 				int index = 0;
 				ite = cs.criteriaIterator();
 				for (List<PairList<String, String>> col : ite) {
-					//	dat[index] = new LocalDataSeries(null);
+					
 					if (filterCrit(dp, col, filters)) {
 						float y = Float.parseFloat(dp.getValue(methodName));
 						String x;
@@ -752,7 +745,7 @@ class InternalExecution implements java.io.Serializable {
 		
 		Map<String, InternalProperty> copy = db.getPropListCopy();
 		for (int i = 0 ; i < size ; i++) {
-	//	for (InternalDataPoint idp : dataPoints) {
+	
 			InternalDataPoint idp = dataPoints.get(i);
 			for (String ip : idp.valuesString.keySet()) {
 				copy.remove(ip);
@@ -779,7 +772,6 @@ class InternalExecution implements java.io.Serializable {
 class InternalDataPoint implements Comparable<InternalDataPoint>, java.io.Serializable {
 	private static final long serialVersionUID = 1;
 
-//	public static final Object sem = new Object();
 
 	int id;
 

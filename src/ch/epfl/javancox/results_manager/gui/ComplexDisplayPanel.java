@@ -87,12 +87,12 @@ public class ComplexDisplayPanel extends JPanel implements ActionListener,
 	private JPanel jPanel2 = null;
 	private JLabel labelXAxis = null;
 	private JLabel labelShape = null;
-	private JComboBox xAxis = null;
-	private JComboBox shapeComboBox = null;
+	private JComboBox<String> xAxis = null;
+	private JComboBox<String> shapeComboBox = null;
 
 	private AbstractChartPanel activeDisplayer = null;
 	private JPanel globalOptionPanel = null;
-	private JComboBox listGraphs = null;
+	private JComboBox<String> listGraphs = null;
 	private JPanel operationWhenMultiple1 = null;
 	private JPanel operationWhenMultiple2 = null;
 	
@@ -104,8 +104,6 @@ public class ComplexDisplayPanel extends JPanel implements ActionListener,
 	private JCheckBox quartIntCheckBox;
 	private JCheckBox maxIntCheckBox;
 	
-//	private JCheckBox[] rangeList = new JCheckBox[3];
-//	private JCheckBox[] lineList = new JCheckBox[3];
 	private JCheckBox seeOutputs;	
 	private ChartPanel chartPanel = null;
 	private JComponent legendPanel = null;
@@ -113,8 +111,6 @@ public class ComplexDisplayPanel extends JPanel implements ActionListener,
 	private JPanel filterPanel = null;
 	private JFrame parentFrame = null;
 
-//	private JScrollPane jScrollPane = null;
-//	private JPanel problemFilterAndConstantPanel__ = null;
 	private Map<String, JList> mapList = null;
 	private boolean show = true;
 	private JPanel firstMedianMeanEtcPanel = null;
