@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.Collections;
 
 import ch.epfl.general_libraries.simulation.Time;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 
 public class TimeLineSet extends ArrayList<TimeLine> {
@@ -164,7 +163,8 @@ public class TimeLineSet extends ArrayList<TimeLine> {
 	
 	@Override
 	public void removeRange(int i, int j) {
-		throw new NotImplementedException();
+//		throw new NotImplementedException();
+		throw new UnsupportedOperationException() ;
 	}
 	
 	public ArrayList<Communication> getCommunications() {

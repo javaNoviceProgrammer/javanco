@@ -57,7 +57,7 @@ public class CustomJFileChooser {
 				for(int i=0; i<extensions.length-1; i++)
 					st.append("."+extensions[i]+", ") ;
 				st.append("."+extensions[extensions.length-1]) ;
-				return st;
+				return st.toString();
 			}
 			
 			@Override
@@ -96,7 +96,7 @@ public class CustomJFileChooser {
 	}
 
 	public String getSelectedDir(){
-		return fc.getCurrentDirectory() ;
+		return fc.getCurrentDirectory().toString() ;
 	}
 
 	public String getCurrentPath(){
