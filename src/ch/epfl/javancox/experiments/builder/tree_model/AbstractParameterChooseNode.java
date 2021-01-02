@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeNode;
 
 import ch.epfl.general_libraries.clazzes.ClassUtils;
 import ch.epfl.general_libraries.clazzes.ObjectRecipe;
@@ -168,6 +169,7 @@ public abstract class AbstractParameterChooseNode extends AbstractChooseNode {
 	public DefinitionIterator getObjectDefinitionIterator() {
 		return new DefinitionIterator() {
 			
+//			Iterator<AbstractChooseNode> childsConstructors;
 			Iterator<AbstractChooseNode> childsConstructors;
 			ConstructorChooseNode currentConstructor;
 			DefinitionIterator[] subIterators;
@@ -184,7 +186,20 @@ public abstract class AbstractParameterChooseNode extends AbstractChooseNode {
 			void reset() {
 				// TODO Auto-generated method stub
 				iteratorExhausted = false;				
-				childsConstructors = children.iterator();
+//				childsConstructors = children.iterator();
+				
+				Iterator<TreeNode> iterator = children.iterator();
+				childsConstructors = new Iterator<AbstractChooseNode>() {
+					@Override
+					public boolean hasNext() {
+						return iterator().hasNext() ;
+					}
+					@Override
+					public AbstractChooseNode next() {
+						return (AbstractChooseNode) iterator.next() ;
+					}
+				} ;
+				
 				constructorsExhausted = startWithNextConstructor();
 				current = getNext();
 				next = getNext();
@@ -193,8 +208,14 @@ public abstract class AbstractParameterChooseNode extends AbstractChooseNode {
 			private boolean startWithNextConstructor() {
 				AbstractChooseNode abstractNode = childsConstructors.next();
 				if (abstractNode instanceof ConstructorChooseNode) {
-					currentConstructor = (ConstructorChooseNode)abstractNode;
-					ArrayList<DefaultMutableTreeNode> chNodeList = Collections.list(currentConstructor.children());
+					currentConstructor = (ConstructorChooseNode) abstractNode;
+//					ArrayList<DefaultMutableTreeNode> chNodeList = Collections.list(currentConstructor.children());
+					
+					ArrayList<DefaultMutableTreeNode> chNodeList = new ArrayList<>() ;
+					while(currentConstructor.children().hasMoreElements()) {
+						chNodeList.add((DefaultMutableTreeNode) currentConstructor.children().nextElement()) ;
+					}
+
 					subIterators = new DefinitionIterator[chNodeList.size()];
 					int index = 0;
 					for (DefaultMutableTreeNode node : chNodeList) {
@@ -292,7 +313,19 @@ public abstract class AbstractParameterChooseNode extends AbstractChooseNode {
 			
 			{
 			
-				childs = children.iterator();
+//				childs = children.iterator();
+				
+				var iterator = children.iterator() ;
+				childs = new Iterator<AbstractChooseNode>() {
+					@Override
+					public boolean hasNext() {
+						return iterator.hasNext() ;
+					}
+					@Override
+					public AbstractChooseNode next() {
+						return (AbstractChooseNode) iterator.next() ;
+					}
+				} ;
 				
 				if (childs.hasNext()) {
 					currentIteratorChild = childs.next();
